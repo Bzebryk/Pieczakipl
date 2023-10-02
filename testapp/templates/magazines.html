@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+   {%for magazine in magazines%}
+    <a class="d-flex align-items-center col btn fs-3" href="/magazine/{{magazine.id}}">{{magazine.magazine_name}}</a>
+   {%endfor%}
+    <br>
+    <br>
+    <div class="col-4">
+    <form method=POST action="#">
+        {%csrf_token%}
+        <label class="form-label">Nazwa magazynu</label>
+        <input class="col form-control" type="text" name="add_magazine_name">
+        <br>
+        <button type="submit" class="col btn btn-primary" name="add_magazine_btn" value="added">Dodaj nowy magazyn</button>
+    </form>
+    </div>
+
+{%endblock%}

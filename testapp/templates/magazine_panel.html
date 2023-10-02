@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%load static%}
+
+{%block content%}
+<div class="row m-1">
+    <div class="d-flex align-items-center col fs-3">Magazyn: {{magazine.magazine_name}} ID: {{magazine.id}}</div>
+</div>
+
+<a class="col-3 btn btn-primary m-1" href="/magazine/add_stock/{{magazine.id}}">Dodaj produkt do magazynu</a>
+<a class="col-3 btn btn-primary m-1"href="/magazine/del_stock/{{magazine.id}}">Usuń produkt z magazynu</a>
+
+</br></br>
+{%for product, stock in magazine.get_stocks%}
+<div class="row m-2 border rounded-1">
+    <div class="col d-flex justify-content-start">Produkt: {{product.product_name}}</div>
+    <div class="col d-flex justify-content-end">Ilość: {{stock}}</div>
+</div>
+{%endfor%}
+{%endblock%}

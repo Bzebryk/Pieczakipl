@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+    <div class="row m-1 align-items-center justify-items-center">
+        <div class="col fs-3 m-3">Produkty:</div>
+        <div class="col-1">Kategoria:</div>
+        <div class="col-3">
+            <form>
+                <select class="form-select" onChange='update_product_list("#product_list","/get_products_list/",this.value)' id="categories_list">
+                    <option value="0">Wszystkie</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div id="product_list"></div>
+
+    <script>
+        update_product_list("#product_list",'/get_products_list/')
+        update_categories_select("#categories_list",'/category/get_categories_list_no_empty')
+    </script>
+
+{%endblock%}

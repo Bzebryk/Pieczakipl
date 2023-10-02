@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<div class="col fs-3 m-3">Koszyk:</div>
+
+<div id="basket"></div>
+
+<script>
+    update_basket('#basket')
+</script>
+
+<div class="col" id="basket_error"></div>
+
+
+{%endblock%}

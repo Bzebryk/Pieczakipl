@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+{%block content%}
+    <form method="POST" action = "#">
+        {%csrf_token%}
+        <label class="form-label">Produkt:</label>
+        <select name="product_id" class="col-3 form-select">
+            {%for product in products%}
+                <option value="{{product.id}}">{{product.product_name}}</option>
+            {%endfor%}
+
+        </select>
+        <label class="form-label">Ilość</label>
+        <input class="col-3 form-control" type="number" name="add_stock_amount">
+
+        <button type="submit" class="col-3 btn btn-primary m-3" name="del_btn" value="deleted">Usuń</button>
+    </form>
+
+
+{%endblock%}

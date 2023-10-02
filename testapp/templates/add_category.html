@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<form method="POST" action="#">
+    {%csrf_token%}
+    <div class="mb-3">
+        <label class="form-label">Nazwa kategorii</label>
+        <input class="form-control" type="text" name="category_name">
+    </div>
+    <button type="submit" name="add_btn" value="added" class="btn btn-primary">Dodaj kategorię</button>
+</form>
+{%endblock%}

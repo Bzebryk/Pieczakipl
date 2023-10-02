@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<form method="POST" action="#">
+    {%csrf_token%}
+    <div class="mb-3">
+        <label class="form-label">Nazwa produktu</label>
+        <input class="form-control" type="text" name="product_name" value="{{product.product_name}}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Opis</label>
+        <textarea class="form-control" name="description">{{product.description}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cena produktu</label></br>
+        <input class="form-control" type="text" name="price" value="{{product.get_netto_price}}">
+    </div>
+
+    <div class="mb-3">
+        <input class="form-check-input" type="checkbox" name="promoted" {%if product.promoted == True%}checked{%endif%}>
+        <label class="form-check-label">Produkt promowany</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Kategoria produktu</label>
+        <select name="category" class="form-select">
+            {%for category in all_categories%}
+            <option value={{category.id}} {%if product.category.id == category.id%}selected{%endif%}>{{category.category_name}}</option>
+            {%endfor%}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Stawka VAT produktu</label>
+        <select name="tax" class="form-select" value="{{product.tax.id}}">
+            {%for tax in taxes%}
+            <option value={{tax.id}} {%if product.tax.id == tax.id%}selected{%endif%}>{{tax.tax_value}}</option>
+            {%endfor%}
+        </select>
+    </div>
+
+    <button type="submit" name="add_btn" value="add" class="btn btn-primary">Zapisz</button>
+    <button type="submit" name="del_btn" value="delete" class="btn btn-primary">Usuń</button>
+</form>
+
+
+
+{%endblock%}
+    

@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+{%block content%}
+    {%if user.is_authenticated%}
+    <ul class="list-group">
+        <li class="fs-5 list-group-item active">Panel użytkownika {{user.username}}</li>
+        <li class="list-group-item">Adres e-mail {{user.email}}</li>
+    </ul>
+    
+    <div class="row mt-4">
+        <div class="col-1 d-flex justify-content-end fs-4"><a href="/user/logout"class="btn btn-primary">Wyloguj</a></div>
+    </div>
+
+    <ul class="list-group mt-4">
+        <li class="fs-5 list-group-item active">Historia zamówień</li>
+        <li class="list-group-item">
+            {%for purchase in purchases%}
+            <ul class='list-group'>
+                <li class="list-group-item mt-1 active">Zamówienie z dnia {{purchase.purchase_date}}</li>
+                {%for product in purchase.get_ordered_products%}
+                <li class="list-group-item">{{product.amount}}x   {{product.product.product_name}}  = {{product.get_brutto_price}}</li>
+
+
+                {%endfor%}
+            </ul>
+           
+            {%endfor%}
+        </li>
+    </ul>
+
+    {%else%}
+    Aby mieć dostęp do tej strony musisz się <a href="/user/login">zalogować</a>
+    {%endif%}
+{%endblock%}

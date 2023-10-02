@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+
+{%block content%}
+<div class="fs-1 m-3">Zaloguj</div>
+    <div class="col-5">
+        <form method='POST' action='#' id="login_form">
+            {% csrf_token %}
+            <label class="form-label mt-4">Nazwa użytkownika:</label>
+            <input type="text" class="form-control" name="username">
+            
+            <label class="form-label mt-2">hasło:</label>
+            <input type="password" class="form-control" name="passwd">
+            
+            <div class="row">
+                <div class="col" id="register_error">{{login_error}}</div>
+            </div>
+    
+            <button class="mt-2 btn btn-primary" name="login_btn" value="1" onClick="validate()">Zaloguj</button>
+        </form>
+    </div>
+
+    <div>Nie posiadasz konta ? Stwórz je <a href="/user/register">tutaj</a></div>
+
+
+{%endblock%}

@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+    <div class="row m-1 align-items-center justify-items-center">
+        <div class="col fs-3 m-3">{{category.category_name}}:</div>
+    </div>
+
+    <div id="product_list"></div>
+
+    <script>
+        update_product_list("#product_list",'/get_products_list/',{{category.id}})
+    </script>
+
+{%endblock%}

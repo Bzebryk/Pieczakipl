@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class='col fs-4 mt-4 mb-2'>Dodaj Produkt</div>
+<form method="POST" action="#">
+    {%csrf_token%}
+    <div class="mb-3">
+        <label class="form-label">Nazwa produktu</label>
+        <input class="form-control" type="text" name="product_name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Opis</label>
+        <textarea class="form-control" name="description"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Cena produktu</label></br>
+        <input class="form-control" type="text" name="price">
+    </div>
+
+    <div class="mb-3">
+
+        <input class="form-check-input" type="checkbox" name="promoted" value="promoted">
+        <label class="form-check-label">Produkt promowany</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Kategoria produktu</label>
+        <select name="category" class="form-select" id="category_select">
+            {%for category in all_categories%}
+            <option value={{category.id}}>{{category.category_name}}</option>
+            {%endfor%}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Stawka VAT produktu</label>
+        <select name="tax" class="form-select">
+            {%for tax in taxes%}
+            <option value={{tax.id}}>{{tax.tax_value}}</option>
+            {%endfor%}
+        </select>
+    </div>
+    <button type="submit" name="add_btn" value="added" class="btn btn-primary">Dodaj produkt</button>
+</form>
+
+    <div class='col fs-4 mt-4'>Dodaj kategorię</div>
+    <div class="mt-3">
+        <label class="form-label">Nazwa kategorii</label>
+        <input class="form-control" type="text" name="category_name" id="category_name">
+    </div>
+    <div class="btn btn-primary mt-2" onClick='add_category("#category_name","#category_select");$("#category_name").val("")'>Dodaj kategorię</div>
+{%endblock%}

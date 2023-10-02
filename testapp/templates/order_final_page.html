@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+{%block content%}
+<div class="col fs-3 m-3">Podsumowanie zamówienia:</div>
+
+<div id="product_list"></div>
+
+<script>
+    generate_final_order_list("#product_list")
+</script>
+
+<div class="col" id="basket_error"></div>
+<div class=' row d-flex justify-content-end'>
+    <div class=" col d-flex justify-content-start ">
+        <div class="fs-3 btn" onClick="place_order();">Zapłać</div>
+    </div>
+    <div class="col">
+        {%if not user.is_authenticated%}
+            <label class="form-label">Email:</label>
+            <input type="text" class='form-control' name="anon_user_email" id="anon_user_email">
+        {%endif%}
+    </div>
+</div>
+
+{%endblock%}

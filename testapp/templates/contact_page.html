@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<div class='fs-3 mb-3'>Formularz kontaktowy</div>
+    <form method='POST' action="#">
+        {%csrf_token%}
+        <label class='form-label mt-3'>Imię</label>
+        <input class = "form-control" type="text" name="contact-form-name">
+        <label class='form-label mt-3'>Adres e-mail:</label>
+        <input class = "form-control" type="text" name="contact-form-email">
+        <label class='form-label mt-3'>Wiadomość</label>
+        <textarea class="form-control mb-3 mt-3" style="resize:none;" name="contact-form-content" rows=15></textarea>
+        <button type='submit' class="btn btn-primary" name="contact-form-submit" value='1'>Wyślij</button>
+    </form>
+
+
+{%endblock%}
