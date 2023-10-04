@@ -71,8 +71,7 @@ function generate_final_order_list(element,api_url = '/get_products_list_from_js
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('X-CSRFToken',getCookie('csrftoken'))
             }
-        }).done(function(data){
-            json_data = jQuery.parseJSON(data)
+        }).done(function(json_data){
             final_order_price = Number(0);
             $.each(json_data,function(key,item){
                 amount = basket[item.id]
@@ -117,8 +116,7 @@ function update_basket(element,api_url = '/get_products_list_from_json'){
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('X-CSRFToken',getCookie('csrftoken'))
             }
-        }).done(function(data){
-            json_data = jQuery.parseJSON(data)
+        }).done(function(json_data){
             $.each(json_data,function(key,value){
                 amount = basket[value.id]
                 basket_item = ""
@@ -149,9 +147,7 @@ function update_product_list(element,api_url,id=0){
     
     if(api_url[api_url.length-1] !='/') api_url+='/'
 
-    $.ajax({url:api_url+id}).done(function(data){
-
-        var products = jQuery.parseJSON(data)
+    $.ajax({url:api_url+id}).done(function(products){
 
         $(element).html("")
         
@@ -164,8 +160,7 @@ function update_product_list(element,api_url,id=0){
 }
 
 function update_categories_menu(element,api_url){
-    $.ajax({url:api_url}).done(function(data){
-        var categories = jQuery.parseJSON(data)
+    $.ajax({url:api_url}).done(function(categories){
         $.each(categories,function(index,item){
             $(element).append('<a class="col btn d-flex justify-content-start" href="/products/'+item.id+'">'+item.name+'</a>')
         })
@@ -173,8 +168,7 @@ function update_categories_menu(element,api_url){
 }
 
 function update_categories_select(element,api_url){
-    $.ajax({url:api_url}).done(function(data){
-        var categories = jQuery.parseJSON(data)
+    $.ajax({url:api_url}).done(function(categories){
         $.each(categories,function(index,item){
             $(element).append('<option value="'+item.id+'">'+item.name+'</option>')
         })
@@ -189,6 +183,17 @@ function get_basket(){
     }
 
     return basket;
+}
+
+function get_basket_size(){
+    basket = get_basket()
+
+    amount = 0;
+    $.each(basket,(index,item)=>{
+        amount += item
+    })
+
+    return amount
 }
 
 function add_to_basket(product_id,amount){

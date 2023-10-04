@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Sum
 from math import ceil
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 
 class CustomUser(AbstractUser):
@@ -90,15 +91,15 @@ class Product_stock(models.Model):
 
 
 class Purchase(models.Model):
-    purchase_date = models.DateTimeField()
+    purchase_date = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(CustomUser,on_delete=models.DO_NOTHING,null=True)
     email = models.EmailField(null=True)
 
 
     def get_ordered_products(self):
-        return Pruchase_item.objects.filter(purchase=self)
+        return Purchase_item.objects.filter(purchase=self)
 
-class Pruchase_item(models.Model):
+class Purchase_item(models.Model):
     purchase    = models.ForeignKey(Purchase,on_delete = models.DO_NOTHING)
     product     = models.ForeignKey(Product,on_delete = models.DO_NOTHING)
     amount      = models.IntegerField()

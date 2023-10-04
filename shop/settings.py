@@ -28,8 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 AUTH_USER_MODEL = "testapp.CustomUser"
 
-EMAIL_HOST = 't.pl'
-EMAIL_PORT = '587'
+LOGIN_URL = '/user/login'
+
+EMAIL_HOST = ''
+EMAIL_PORT = ''
 EMAIL_USE_TLS = False
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
